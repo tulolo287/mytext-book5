@@ -1,22 +1,31 @@
+import { FC } from "react";
+import { TCategory } from "../../types/data";
+
 const subCategories = [
-  { name: "Totes", href: "#" },
+  { name: "All", href: "#" },
+  { name: "Totes", href: "totes" },
   { name: "Backpacks", href: "#" },
   { name: "Travel Bags", href: "#" },
   { name: "Hip Bags", href: "#" },
   { name: "Laptop Sleeves", href: "#" },
 ];
-const Filter = () => {
+type TFilter = {
+  filterHandle: (category: TCategory) => void;
+};
+const Filter: FC<TFilter> = ({ filterHandle }) => {
   return (
-    <ul
-      role="list"
-      className="flex justify-around border-t border-gray-200 pt-6 text-sm font-medium text-gray-900"
-    >
-      {subCategories.map((category) => (
-        <li key={category.name}>
-          <a href={category.href}>{category.name}</a>
-        </li>
-      ))}
-    </ul>
+    <div className="relative">
+      <ul
+        role="list"
+        className="flex justify-around border-t border-gray-200 py-4 text-sm font-medium text-gray-900"
+      >
+        {subCategories.map((category) => (
+          <li onClick={() => filterHandle(category)} key={category.name}>
+            {category.name}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
